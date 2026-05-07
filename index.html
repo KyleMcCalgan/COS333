@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Notes — Programming Languages</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="layout">
+
+  <!-- Mobile controls -->
+  <button class="menu-toggle" aria-label="Open menu">☰</button>
+  <div class="sidebar-overlay"></div>
+
+  <!-- ═══════════════ SIDEBAR ═══════════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="course-label">COS 301 · Concepts of PL</span>
+      <h1>Programming Language Concepts</h1>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Overview</span>
+      <a href="index.html" class="active">
+        <span class="nav-chapter">00</span> Home &amp; Topics
+      </a>
+
+      <span class="nav-section-label">Chapters</span>
+      <a href="chapter5.html">
+        <span class="nav-chapter">05</span> Names, Bindings &amp; Scopes
+      </a>
+      <a href="chapter6.html">
+        <span class="nav-chapter">06</span> Data Types
+      </a>
+      <a href="chapter16.html">
+        <span class="nav-chapter">16</span> Logic Programming
+      </a>
+
+      <span class="nav-section-label">Practical</span>
+      <a href="prolog-practical.html">
+        <span class="nav-chapter">P3</span> Prolog in Practice
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="theme-toggle">
+        <span class="toggle-icon">☾</span>
+        <span class="toggle-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════ MAIN ═══════════════ -->
+  <main class="main">
+    <div class="reading-progress"><div class="reading-progress-bar"></div></div>
+
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+    </div>
+
+    <header class="page-header">
+      <span class="chapter-tag">Study Notes · Overview</span>
+      <h1>Programming Language Concepts</h1>
+      <p class="subtitle">
+        Notes covering Chapters 5, 6, and 16 — Names &amp; Bindings, Data Types,
+        and Logic Programming with Prolog — plus a hands-on Prolog practical.
+      </p>
+      <div class="topic-pills">
+        <span class="pill">Names &amp; Scopes</span>
+        <span class="pill">Type Binding</span>
+        <span class="pill">Data Types</span>
+        <span class="pill">Pointers</span>
+        <span class="pill">Prolog</span>
+        <span class="pill">Horn Clauses</span>
+        <span class="pill">Unification</span>
+        <span class="pill">Recursion</span>
+        <span class="pill">Cut</span>
+      </div>
+    </header>
+
+    <article class="article">
+
+      <h2>What's in these notes</h2>
+      <p>
+        These notes cover three core chapters from a typical Programming Languages course. Each page is self-contained but builds on previous ideas — understanding type binding in Chapter 5 makes Chapter 6's type system design much clearer.
+      </p>
+
+      <!-- Chapter cards -->
+      <div style="display:flex; flex-direction:column; gap: var(--sp-5); margin: var(--sp-6) 0; max-width: var(--content-max);">
+
+        <a href="chapter5.html" style="text-decoration:none; display:block;">
+          <div style="border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-6); background: var(--bg-hover); transition: border-color 0.2s, box-shadow 0.2s; cursor: pointer;"
+               onmouseover="this.style.borderColor='var(--accent)'; this.style.boxShadow='var(--shadow-md)'"
+               onmouseout="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+            <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: var(--sp-2);">Chapter 5</div>
+            <div style="font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--sp-2);">Names, Bindings &amp; Scopes</div>
+            <div style="font-size: var(--fs-sm); color: var(--text-muted);">Variable attributes, binding times, static vs dynamic type binding, storage lifetimes, static and dynamic scoping, named constants.</div>
+          </div>
+        </a>
+
+        <a href="chapter6.html" style="text-decoration:none; display:block;">
+          <div style="border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-6); background: var(--bg-hover); transition: border-color 0.2s, box-shadow 0.2s; cursor: pointer;"
+               onmouseover="this.style.borderColor='var(--accent)'; this.style.boxShadow='var(--shadow-md)'"
+               onmouseout="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+            <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: var(--sp-2);">Chapter 6</div>
+            <div style="font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--sp-2);">Data Types</div>
+            <div style="font-size: var(--fs-sm); color: var(--text-muted);">Primitive types, strings, arrays, records, tuples, unions, pointers, type checking, strong typing, coercion, and type equivalence.</div>
+          </div>
+        </a>
+
+        <a href="chapter16.html" style="text-decoration:none; display:block;">
+          <div style="border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-6); background: var(--bg-hover); transition: border-color 0.2s, box-shadow 0.2s; cursor: pointer;"
+               onmouseover="this.style.borderColor='var(--accent)'; this.style.boxShadow='var(--shadow-md)'"
+               onmouseout="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+            <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: var(--sp-2);">Chapter 16</div>
+            <div style="font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--sp-2);">Logic Programming</div>
+            <div style="font-size: var(--fs-sm); color: var(--text-muted);">Predicate calculus, Horn clauses, Prolog syntax (facts, rules, goals), backtracking, list processing, and Prolog's deficiencies.</div>
+          </div>
+        </a>
+
+        <a href="prolog-practical.html" style="text-decoration:none; display:block;">
+          <div style="border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--sp-6); background: var(--bg-hover); transition: border-color 0.2s, box-shadow 0.2s; cursor: pointer;"
+               onmouseover="this.style.borderColor='var(--accent)'; this.style.boxShadow='var(--shadow-md)'"
+               onmouseout="this.style.borderColor='var(--border)'; this.style.boxShadow='none'">
+            <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: var(--sp-2);">Practical 3</div>
+            <div style="font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--sp-2);">Prolog in Practice</div>
+            <div style="font-size: var(--fs-sm); color: var(--text-muted);">Writing real Prolog — syntax rules, unification, list patterns, recursion, the cut operator, and full worked examples for network connectivity, filtering, and consecutive pairs.</div>
+          </div>
+        </a>
+
+      </div>
+
+      <h2>Key Themes Across Chapters</h2>
+
+      <div class="callout key">
+        <div class="callout-label">📌 Central Idea</div>
+        <p>
+          Programming languages make <strong>design choices</strong> at every level — from how names are resolved to how types are checked. Each choice involves trade-offs between
+          <strong>writability</strong>, <strong>readability</strong>, <strong>reliability</strong>, and <strong>efficiency</strong>.
+        </p>
+      </div>
+
+      <h3>The Design Trade-off Pattern</h3>
+      <p>You'll see this pattern repeatedly across all three chapters:</p>
+      <ul>
+        <li><strong>Static approaches</strong> — determined at compile time; more efficient, more reliable, less flexible.</li>
+        <li><strong>Dynamic approaches</strong> — determined at runtime; more flexible, higher overhead, harder to debug.</li>
+        <li>Most modern languages use a mix (e.g., statically typed but with dynamic dispatch).</li>
+      </ul>
+
+      <h3>Language Comparison Thread</h3>
+      <p>These chapters compare C, C++, Java, C#, Python, JavaScript, Prolog, Perl, and others. Pay attention to <em>why</em> a language made each choice, not just <em>what</em> choice it made.</p>
+
+      <div class="callout warning">
+        <div class="callout-label">⚠ Exam Focus</div>
+        <p>
+          Be able to explain the difference between <strong>static vs dynamic scoping</strong>, <strong>static vs dynamic type binding</strong>, and the four <strong>storage lifetime categories</strong>. These are high-frequency exam topics.
+        </p>
+      </div>
+
+      <div class="summary-box">
+        <h2>Quick Reference</h2>
+        <ul>
+          <li><strong>Binding time</strong>: When an attribute gets associated with an entity (compile time, load time, runtime).</li>
+          <li><strong>Static scoping</strong>: Name resolution based on program text structure.</li>
+          <li><strong>Dynamic scoping</strong>: Name resolution based on call chain at runtime.</li>
+          <li><strong>Strong typing</strong>: All type errors are always detected.</li>
+          <li><strong>Prolog</strong>: A logic programming language using Horn clauses, backward chaining, and depth-first search with backtracking.</li>
+        </ul>
+      </div>
+
+    </article>
+  </main>
+</div>
+<script src="study-notes.js"></script>
+</body>
+</html>
