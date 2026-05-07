@@ -30,6 +30,9 @@
 
       <span class="nav-section-label">Practical</span>
       <a href="prolog-practical.html"><span class="nav-chapter">P3</span> Prolog in Practice</a>
+
+      <span class="nav-section-label">Assessment</span>
+      <a href="semester-tests.html"><span class="nav-chapter">ST2</span> Semester Test 2</a>
     </nav>
 
     <div class="sidebar-toc">
@@ -37,7 +40,10 @@
       <a href="#primitive">Primitive Types</a>
       <a href="#strings">String Types</a>
       <a href="#arrays">Array Types</a>
+      <a href="#associative">Associative Arrays</a>
       <a href="#records">Record Types</a>
+      <a href="#tuples">Tuple Types</a>
+      <a href="#list-types">List Types</a>
       <a href="#unions">Union Types</a>
       <a href="#pointers">Pointers &amp; References</a>
       <a href="#type-checking">Type Checking</a>
@@ -254,6 +260,72 @@
       </div>
 
       <!-- ─── RECORDS ──────────────────────────────── -->
+      <h3>Aggregate Array Operations</h3>
+      <p>
+        Some languages support operations on entire arrays rather than only element-by-element access.
+        This is a major writability improvement over manually writing loops for every transformation.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Language</th><th>Support</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td>APL</td><td>Rich built-in array algebra</td><td>The classic high-power array language</td></tr>
+            <tr><td>Python</td><td><code>+</code>, <code>in</code>, <code>==</code>, <code>is</code></td><td>Assignment changes references, not contents</td></tr>
+            <tr><td>Java</td><td><code>clone()</code></td><td>Copies contents; plain assignment only copies the reference</td></tr>
+            <tr><td>Fortran 95</td><td>Elemental operations like <code>C = A + B</code></td><td>Corresponding elements are combined as a unit</td></tr>
+            <tr><td>F#</td><td><code>Array.append</code>, <code>Array.copy</code></td><td>Library-level aggregate support</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Slices</h3>
+      <p>
+        A <strong>slice</strong> extracts part of an array as a unit. It is a referencing mechanism, not a distinct type.
+      </p>
+
+      <pre><code><span class="cm"># Python slices</span>
+vector = [3, 6, 9, 12, 15, 18, 21]
+vector[3:6]      <span class="cm"># [12, 15, 18]</span>
+vector[0:7:2]    <span class="cm"># [3, 9, 15, 21]</span>
+
+<span class="cm"># Ruby slices</span>
+list.slice(2, 2)
+list.slice(1..3)</code></pre>
+
+      <div class="callout key">
+        <div class="callout-label">Why Slices Matter</div>
+        <p>
+          Slices make sub-array operations much more readable and are one of the biggest usability improvements over early fixed-array models.
+        </p>
+      </div>
+
+      <h2 id="associative">Associative Arrays</h2>
+      <p>
+        An <strong>associative array</strong> is an unordered collection of key-value pairs where user-defined keys replace numeric subscripts.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Language</th><th>Name</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Perl</td><td>Hash</td><td><code>exists</code>, <code>delete</code>, <code>keys</code>, <code>values</code>, <code>each</code></td></tr>
+            <tr><td>Python</td><td>Dictionary</td><td>Maps keys to object references</td></tr>
+            <tr><td>Ruby</td><td>Hash</td><td>Keys can be arbitrary objects</td></tr>
+            <tr><td>PHP</td><td>Unified array</td><td>One structure behaves as both indexed and associative</td></tr>
+            <tr><td>Lua</td><td>Table</td><td>Can act as an array, associative array, or record</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <pre><code><span class="cm"># Python dictionary</span>
+salaries = {"Gary": 75000, "Perry": 57000}
+salaries["Perry"] = 58850
+
+<span class="cm"># Perl hash</span>
+%salaries = ("Gary" =&gt; 75000, "Perry" =&gt; 57000);
+$salaries{"Perry"} = 58850;</code></pre>
+
       <h2 id="records">Record Types</h2>
 
       <dl class="definition">
@@ -280,6 +352,56 @@ Employee_Record.Hourly_Rate := 25.50;</code></pre>
       </div>
 
       <!-- ─── UNIONS ───────────────────────────────── -->
+      <h2 id="tuples">Tuple Types</h2>
+      <p>
+        A <strong>tuple</strong> is similar to a record, except its components are not named.
+        Tuples are widely used to return multiple values from a function.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Language</th><th>Tuple Style</th><th>Key Property</th></tr></thead>
+          <tbody>
+            <tr><td>Python</td><td><code>(3, 5.8, "apple")</code></td><td>Immutable; indexed from 0</td></tr>
+            <tr><td>ML</td><td><code>(3, 5.8, "apple")</code></td><td>At least two elements; selectors like <code>#1</code></td></tr>
+            <tr><td>F#</td><td><code>let tup = (3, 5.8, "apple")</code></td><td>Usually unpacked with pattern matching</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <pre><code><span class="cm"># Python tuple unpacking</span>
+point = (4, 9)
+x, y = point
+
+<span class="cm">// F# multiple assignment from a tuple</span>
+let a, b, c = tup</code></pre>
+
+      <h2 id="list-types">List Types</h2>
+      <p>
+        "List" means different things in different languages, so it is worth separating functional lists from dynamic array-like lists.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Language Family</th><th>Model</th><th>Important Trait</th></tr></thead>
+          <tbody>
+            <tr><td>Lisp / Scheme</td><td>Linked list</td><td>Immutable; core operations are <code>CAR</code>, <code>CDR</code>, <code>CONS</code>, <code>LIST</code></td></tr>
+            <tr><td>ML / F#</td><td>Functional list</td><td>Homogeneous; prepend with <code>::</code></td></tr>
+            <tr><td>Python</td><td>Dynamic array-like list</td><td>Mutable and used as the language's main general sequence type</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout note">
+        <div class="callout-label">List Comprehensions</div>
+        <p>
+          Python and F# support comprehension-style construction, which greatly improves writability by combining iteration, filtering, and construction into one expression.
+        </p>
+      </div>
+
+      <pre><code><span class="cm"># Python list comprehension</span>
+[x ** 2 for x in range(12) if x % 3 == 0]   <span class="cm"># [0, 9, 36, 81]</span></code></pre>
+
       <h2 id="unions">Union Types</h2>
 
       <dl class="definition">
@@ -513,7 +635,9 @@ increment(v);     <span class="cm">// v becomes 21</span></code></pre>
         <h2>Chapter 6 Summary</h2>
         <ul>
           <li><strong>Primitive types</strong>: Integer, float, complex, decimal, boolean, character. Design choices reflect hardware constraints and application needs.</li>
-          <li><strong>Arrays</strong>: 5 categories of subscript/storage binding from static to heap-dynamic. Java uses fixed heap-dynamic; Python/JS use heap-dynamic.</li>
+          <li><strong>Arrays</strong>: 5 categories of subscript/storage binding from static to heap-dynamic. Java uses fixed heap-dynamic; Python/JS use heap-dynamic. Slices and aggregate operations improve writability.</li>
+          <li><strong>Associative arrays</strong>: Key-value collections used in Perl hashes, Python dictionaries, Ruby hashes, PHP arrays, and Lua tables.</li>
+          <li><strong>Tuples and lists</strong>: Tuples package fixed multiple values; list models differ sharply between functional languages and Python-style dynamic lists.</li>
           <li><strong>Unions</strong>: Free unions (C) are unsafe; discriminated unions (ML/F#) include a tag that enables type checking.</li>
           <li><strong>Pointers</strong>: Enable heap access but introduce dangling pointer and memory leak problems. Java avoids this with garbage collection and references only.</li>
           <li><strong>Strong typing</strong>: Always detecting type errors. C/C++ are not; Java/C# are mostly. Coercion weakens type safety.</li>

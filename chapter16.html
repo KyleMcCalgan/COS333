@@ -30,6 +30,9 @@
 
       <span class="nav-section-label">Practical</span>
       <a href="prolog-practical.html"><span class="nav-chapter">P3</span> Prolog in Practice</a>
+
+      <span class="nav-section-label">Assessment</span>
+      <a href="semester-tests.html"><span class="nav-chapter">ST2</span> Semester Test 2</a>
     </nav>
 
     <div class="sidebar-toc">
@@ -39,9 +42,11 @@
       <a href="#prolog-intro">Prolog Overview</a>
       <a href="#terms">Terms &amp; Statements</a>
       <a href="#inferencing">Inferencing Process</a>
+      <a href="#theorem-proving">Theorem Proving</a>
       <a href="#arithmetic">Arithmetic</a>
       <a href="#lists">List Structures</a>
       <a href="#deficiencies">Deficiencies</a>
+      <a href="#applications">Applications</a>
     </div>
 
     <div class="sidebar-footer">
@@ -298,6 +303,30 @@ sibling(X, Y) :- mother(M, X), mother(M, Y),
         <dt>Unification</dt>
         <dd>The process of finding values for variables in propositions that allow a matching process to succeed. A variable is <strong>instantiated</strong> to a tentative value. If matching fails, <strong>backtracking</strong> occurs and a different value is tried.</dd>
       </dl>
+
+      <h2 id="theorem-proving">Theorem Proving</h2>
+      <p>
+        Resolution is not only a query mechanism; it is also a formal theorem-proving technique.
+      </p>
+
+      <div class="definition">
+        <dt>Refutation Complete</dt>
+        <dd>If a contradiction exists in the propositions under consideration, resolution can detect it. That is why it supports proof by contradiction.</dd>
+      </div>
+
+      <ol>
+        <li>Start with the known hypotheses.</li>
+        <li>Negate the theorem you want to prove.</li>
+        <li>Add that negated theorem to the hypotheses.</li>
+        <li>Use resolution to derive a contradiction.</li>
+      </ol>
+
+      <div class="callout key">
+        <div class="callout-label">Proof Pattern</div>
+        <p>
+          If assuming the theorem is false creates an inconsistency, the original theorem must be true.
+        </p>
+      </div>
 
       <h3>Tracing Model</h3>
       <p>Prolog has a built-in trace mechanism with 4 events:</p>
@@ -624,6 +653,48 @@ sorted([X, Y | List]) :- X =&lt; Y, sorted([Y | List]).</code></pre>
       </div>
 
       <!-- ─── SUMMARY ──────────────────────────────── -->
+      <h2 id="applications">Applications of Logic Programming</h2>
+      <p>
+        Logic programming is especially strong in domains where stored relationships and inference matter more than low-level execution speed.
+      </p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="cc-label advantage">Relational Databases</div>
+          <ul>
+            <li>Facts model stored data; rules model relationships between tables</li>
+            <li>Queries are naturally nonprocedural</li>
+            <li>Deductive capabilities go beyond ordinary static storage</li>
+          </ul>
+        </div>
+        <div class="compare-card">
+          <div class="cc-label disadvantage">Trade-off</div>
+          <ul>
+            <li>Inferencing is slower than direct optimized table lookup</li>
+            <li>Expressiveness comes with performance cost</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="cc-label advantage">Expert Systems</div>
+          <ul>
+            <li>Rules + facts fit the knowledge-base model directly</li>
+            <li>Trace support can explain conclusions</li>
+            <li>New facts and rules can simulate learning</li>
+          </ul>
+        </div>
+        <div class="compare-card">
+          <div class="cc-label advantage">Natural-Language Processing</div>
+          <ul>
+            <li>Grammar rules align well with logic rules</li>
+            <li>Backward chaining can assist parsing</li>
+            <li>Clausal forms help model sentence meaning</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="summary-box">
         <h2>Chapter 16 Summary</h2>
         <ul>
@@ -631,9 +702,11 @@ sorted([X, Y | List]) :- X =&lt; Y, sorted([Y | List]).</code></pre>
           <li><strong>Horn clauses</strong>: Facts (headless) and rules (headed). Facts are unconditional truths; rules are conditional derivations. Prolog uses Horn clause syntax.</li>
           <li><strong>Prolog basics</strong>: Atoms start lowercase; variables start uppercase. Three statement types: facts, rules, goals.</li>
           <li><strong>Resolution</strong>: Backward chaining (goal → facts) + depth-first search + backtracking when subgoals fail.</li>
+          <li><strong>Theorem proving</strong>: Negate the target theorem, add it to the hypotheses, and derive a contradiction through resolution.</li>
           <li><strong>Unification</strong>: Matching variables to values. Instantiation is temporary — backtracking un-does it.</li>
           <li><strong>List processing</strong>: Uses <code>[Head | Tail]</code> pattern. member, append, reverse follow a base-case + recursive-case structure.</li>
           <li><strong>Key deficiencies</strong>: Closed-world assumption (false ≠ actually false), negation as failure (not logical NOT), and brute-force inefficiency for some tasks.</li>
+          <li><strong>Best-fit applications</strong>: deductive databases, expert systems, and natural-language processing.</li>
         </ul>
       </div>
 

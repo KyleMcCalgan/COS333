@@ -30,6 +30,9 @@
 
       <span class="nav-section-label">Practical</span>
       <a href="prolog-practical.html"><span class="nav-chapter">P3</span> Prolog in Practice</a>
+
+      <span class="nav-section-label">Assessment</span>
+      <a href="semester-tests.html"><span class="nav-chapter">ST2</span> Semester Test 2</a>
     </nav>
 
     <div class="sidebar-toc">
@@ -40,7 +43,10 @@
       <a href="#type-binding">Type Binding</a>
       <a href="#storage">Storage &amp; Lifetimes</a>
       <a href="#scope">Scope</a>
+      <a href="#let-construct">let Construct</a>
+      <a href="#declaration-order">Declaration Order</a>
       <a href="#dynamic-scope">Dynamic Scope</a>
+      <a href="#referencing-environment">Referencing Environment</a>
       <a href="#named-constants">Named Constants</a>
     </div>
 
@@ -424,6 +430,37 @@ arr = <span class="st">"now a string"</span>;   <span class="cm">// old array fr
         <li><strong>Python</strong>: A global can be <em>read</em> inside a function; to <em>assign</em> to it, you must declare <code>global x</code> inside the function.</li>
       </ul>
 
+      <h3 id="let-construct">The <code>let</code> Construct</h3>
+      <p>
+        Functional languages often create local scope with a <code>let</code> construct instead of statement blocks.
+        The bindings behave like local named constants inside a limited expression scope.
+      </p>
+
+      <pre><code><span class="cm">// F#-style idea</span>
+let radius = 5
+let area = 3.14159 * radius * radius</code></pre>
+
+      <h3 id="declaration-order">Declaration Order</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Language</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td>C89</td><td>Declarations must appear at the beginning of a function/block</td></tr>
+            <tr><td>C99, C++, Java, JavaScript, C#</td><td>Declarations can appear anywhere a statement can</td></tr>
+            <tr><td>C++, Java, C#</td><td><code>for</code>-loop control variables are scoped to the loop body</td></tr>
+            <tr><td>JavaScript</td><td>Traditional function-scoped locals can be referenced before the declaration statement is reached</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-label">C# Scope Quirk</div>
+        <p>
+          In C#, a block variable's scope is considered the whole block even when the declaration appears later.
+          You still cannot use it before the declaration line, but its name is already reserved for that block.
+        </p>
+      </div>
+
       <!-- ─── DYNAMIC SCOPE ─────────────────────────── -->
       <h2 id="dynamic-scope">Dynamic Scope</h2>
       <p>
@@ -479,6 +516,15 @@ arr = <span class="st">"now a string"</span>;   <span class="cm">// old array fr
       <p>
         The C static example is the key one: <strong>narrow scope, wide lifetime</strong>. The variable is alive the whole program but only nameable within the function.
       </p>
+
+      <h3 id="referencing-environment">Referencing Environment</h3>
+      <p>
+        The <strong>referencing environment</strong> of a statement is the full collection of names visible at that point.
+      </p>
+      <ul>
+        <li>In a <strong>static-scoped</strong> language: local names plus visible names from static ancestor scopes.</li>
+        <li>In a <strong>dynamic-scoped</strong> language: local names plus names from all currently active subprograms on the call stack.</li>
+      </ul>
 
       <!-- ─── NAMED CONSTANTS ──────────────────────── -->
       <h2 id="named-constants">Named Constants</h2>
